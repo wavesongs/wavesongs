@@ -25,6 +25,8 @@ jobs:
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
         with:
           publish_branch: gh-pages
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.EXTERNAL_REPO_TOKEN }}
+          external_repository: wavesongs/wavesongs.github.io
+          publish_branch: main
           publish_dir: _build/
           force_orphan: true
