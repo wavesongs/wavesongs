@@ -8,29 +8,33 @@ permissions:
 jobs:
   docs:
     runs-on: ubuntu-latest
-    permissions:
-      issues: write
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-python@v5
+
       - name: Install dependencies
         run: |
           pip install -r docs/requirements.txt
+
       - name: Install wavesongs
         run: |
           pip install -e .
+
       - name: Sphinx build
         run: |
           sphinx-build docs _build
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+
+      - name: Push docs to external repository
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-        with:
-          publish_branch: gh-pages
-          # github_token: ${{ secrets.EXTERNAL_REPO_PAT }}  # <-- THIS FIXES THE ERROR
-          # github_token: ${{ secrets.EXTERNAL_REPO_TOKEN }}
-          external_repository: wavesongs/wavesongs.github.io
-          publish_dir: _build/
-          force_orphan: true
-        env:
-          GH_TOKEN: ${{ secrets.EXTERNAL_REPO_TOKEN }}
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          cd _build
+          git init
+          git remote add origin https://x-access-token:${{ secrets.TARGET_REPO_TOKEN }}@github.com/wavesongs/wavesongs.github.io.git
+          git checkout -b gh-pages
+          git add .
+          git commit -m "Update documentation from source repo"
+          git push --force origin gh-pages
