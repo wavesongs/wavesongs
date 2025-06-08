@@ -8,6 +8,8 @@ permissions:
 jobs:
   docs:
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -31,4 +33,4 @@ jobs:
           publish_dir: _build/
           force_orphan: true
         env:
-          $GITHUB_TOKEN: ${{ secrets.EXTERNAL_REPO_PAT }}
+          GH_TOKEN: ${{ secrets.EXTERNAL_REPO_TOKEN }}
