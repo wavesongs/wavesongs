@@ -36,4 +36,4 @@ jobs:
           git remote add origin https://x-access-token:${{ secrets.TARGET_REPO_TOKEN }}@github.com/wavesongs/wavesongs.github.io.git
           git add .
           git commit -m "Update documentation from source repo 2"
-          git push --force origin gh-pages
+          git push --force origin main
