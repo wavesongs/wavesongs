@@ -26,6 +26,7 @@ extensions = [
     "myst_nb",
     # "myst_parser",
     "sphinx_design",
+    'sphinx.ext.githubpages',
     'sphinx.ext.napoleon',
     "sphinx.ext.autodoc",
     "sphinx.ext.viewcode",
@@ -99,9 +100,10 @@ html_static_path = ['_static']
 html_css_files = ["css/custom.css"]
 
 html_theme_options = {
+    "navigation_with_keys": True,
     "repository_url": "https://github.com/wavesongs/wavesongs.github.io",
     "repository_branch": "main",
-    "path_to_docs": "docs/",
+    "path_to_docs": "./",
     "use_repository_button": True,
     "use_download_button": True,
     "use_fullscreen_button": True,
