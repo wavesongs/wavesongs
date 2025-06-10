@@ -31,7 +31,7 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           
-          cd _build/html
+          cd _build
           touch .nojekyll
           git init
           git remote add origin https://x-access-token:${{ secrets.TARGET_REPO_TOKEN }}@github.com/wavesongs/wavesongs.github.io.git
