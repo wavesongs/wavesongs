@@ -99,7 +99,7 @@ html_static_path = ['_static']
 html_css_files = ["css/custom.css"]
 
 html_theme_options = {
-    "repository_url": "https://github.com/wavesongs/wavesongs",
+    "repository_url": "https://github.com/wavesongs/wavesongs.github.io",
     "repository_branch": "main",
     "path_to_docs": "docs/",
     "use_repository_button": True,
