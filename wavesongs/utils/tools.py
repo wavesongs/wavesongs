@@ -186,7 +186,7 @@ def get_roi(klicker: clicker) -> List[Tuple[float]]:
     return times
 
 # %%
-def get_measures(klicker, obj, save=False, labels=_LABELS):
+def get_measures(klicker, obj, save=False, labels=_LABELS, csv_name="measures.csv"):
     f_max_min = _shift_time(klicker.get_positions()[labels[0]], obj)
     theme_ini = _shift_time(klicker.get_positions()[labels[1]], obj)
     theme_end = _shift_time(klicker.get_positions()[labels[2]], obj)
@@ -290,9 +290,8 @@ def get_measures(klicker, obj, save=False, labels=_LABELS):
     , index=[0])
 
     if save:
-        # data_df.to_csv()
-        pass
-
+        data_df.to_csv(csv_name, index=False)
+        
     return data_df
 
 #%%
