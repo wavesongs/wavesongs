@@ -1,0 +1,53 @@
+---
+myst:
+  html_meta:
+    "description lang=en": |
+      Documentation for users who wish to build sphinx sites with
+      pydata-sphinx-theme.
+---
+
+
+# To do
+
+**migrate to a generalized problem with birdsongs as the base example**
+
+Instantiate
+Optimizer
+
+- the code to create a synthetic syllable dependes on the mode. Make it independent to plot the curves wihtout need to compute the syllable.
+- Create logo
+- Other optimization algorithms
+- Update user guide
+  - Download package
+  - Objects explain
+  - Directory manager
+  - Contribute
+  - FAQs & known issues
+- Update tutorials and examples
+  - Syllable definition and visualizing
+  - Creating a synthetic syllable
+  - Measuring in the plot
+  - Segmenting syllables
+- Add other models (EDO an core submodel): monkeys, frogs, cicada
+
+# User Guide
+
+You can configure the behavior, look, and feel of the theme in many ways.
+The remaining pages in the user guide cover various ways of doing so.
+
+```{danger}
+This theme is still under active development, and we make no promises
+about the stability of any specific HTML structure, CSS variables, etc.
+Make these customizations at your own risk, and pin versions if you're
+worried about breaking changes!
+```
+
+There are a number of options for configuring your site's look and feel.
+All configuration options are passed with the `html_theme_options` variable in your `conf.py` file.
+This is a dictionary with `key: val` pairs that you can configure in various ways.
+
+```{toctree}
+:caption: Get started
+
+install
+```

@@ -1,0 +1,23 @@
+# Preguntas a Gabo
+
+- Cómo calcula el alpha, ya que el beta es propuesto. Se calcula b(f0) es una cuadratica, por qué?
+- plantear un espacio de represntacion (gaussianas, polynomios, o solo polynomios)Tiene sentido pensar que beta son impulsos de aire gaussianos y los betas se pueden parametrizar como figuras de lissajaous?
+- Acoplamiento de dos syringes
+-  
+
+
+is it good to have genral and specific objectives?
+tools use the icons of the packages
+
+hypothesis and goals
+
+genral:
+  - numerical study of the two labia pairs coupling, trachea, and OEC using the biomechanical motor‑gesture model of birdsong.
+  - open source code of the numerical model and some tools por processing and visualitzation of data
+  - validation of the numerical model with experimental data from different species, oscines
+  - study coupling effects in the syrinx using the numerical model
+
+qualyfitaction
+introduction (state of art, motivation, objectives)
+methodologia ()
+cronograma

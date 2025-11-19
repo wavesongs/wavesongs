@@ -1,0 +1,246 @@
+{
+ "ProjDirs": [
+  {
+   "is_class": true,
+   "is_explicit": false,
+   "module": "wavesongs.data",
+   "module_short": "wavesongs.data",
+   "name": "ProjDirs"
+  },
+  {
+   "is_class": true,
+   "is_explicit": false,
+   "module": "wavesongs",
+   "module_short": "wavesongs",
+   "name": "ProjDirs"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.data",
+   "module_short": "wavesongs.data",
+   "name": "ProjDirs"
+  }
+ ],
+ "Syllable": [
+  {
+   "is_class": true,
+   "is_explicit": false,
+   "module": "wavesongs.object",
+   "module_short": "wavesongs.object",
+   "name": "Syllable"
+  },
+  {
+   "is_class": true,
+   "is_explicit": false,
+   "module": "wavesongs",
+   "module_short": "wavesongs",
+   "name": "Syllable"
+  },
+  {
+   "is_class": true,
+   "is_explicit": false,
+   "module": "wavesongs.object",
+   "module_short": "wavesongs.object",
+   "name": "Base"
+  },
+  {
+   "is_class": true,
+   "is_explicit": false,
+   "module": "wavesongs",
+   "module_short": "wavesongs",
+   "name": "Base"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.object",
+   "module_short": "wavesongs.object",
+   "name": "Syllable"
+  }
+ ],
+ "copeton_1": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.object",
+   "module_short": "wavesongs.object",
+   "name": "Syllable"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs",
+   "module_short": "wavesongs",
+   "name": "Syllable"
+  }
+ ],
+ "copeton_1.acoustical_features": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.object",
+   "module_short": "wavesongs.object",
+   "name": "Syllable.acoustical_features"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs",
+   "module_short": "wavesongs",
+   "name": "Syllable.acoustical_features"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.object",
+   "module_short": "wavesongs.object",
+   "name": "Base.acoustical_features"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs",
+   "module_short": "wavesongs",
+   "name": "Base.acoustical_features"
+  }
+ ],
+ "fig": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "plotly.graph_objs._figure",
+   "module_short": "plotly.graph_objs",
+   "name": "Figure"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "plotly.graph_objs",
+   "module_short": "plotly.graph_objs",
+   "name": "Figure"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "plotly",
+   "module_short": "plotly",
+   "name": "Figure"
+  }
+ ],
+ "plotter": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.util.plot",
+   "module_short": "wavesongs.util.plot",
+   "name": "Plotly"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.util",
+   "module_short": "wavesongs.util",
+   "name": "Plotly"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs",
+   "module_short": "wavesongs",
+   "name": "Plotly"
+  }
+ ],
+ "plotter.spectrogram": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.util.plot",
+   "module_short": "wavesongs.util.plot",
+   "name": "Plotly.spectrogram"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.util",
+   "module_short": "wavesongs.util",
+   "name": "Plotly.spectrogram"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs",
+   "module_short": "wavesongs",
+   "name": "Plotly.spectrogram"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.util.plot",
+   "module_short": "wavesongs.util.plot",
+   "name": "Base.spectrogram"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.util",
+   "module_short": "wavesongs.util",
+   "name": "Base.spectrogram"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs",
+   "module_short": "wavesongs",
+   "name": "Base.spectrogram"
+  }
+ ],
+ "proj_dirs": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.data",
+   "module_short": "wavesongs.data",
+   "name": "ProjDirs"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs",
+   "module_short": "wavesongs",
+   "name": "ProjDirs"
+  }
+ ],
+ "proj_dirs.find_audios": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.data",
+   "module_short": "wavesongs.data",
+   "name": "ProjDirs.find_audios"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs",
+   "module_short": "wavesongs",
+   "name": "ProjDirs.find_audios"
+  }
+ ],
+ "set_plotter": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "builtins",
+   "module_short": "builtins",
+   "name": "function"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.util.plot",
+   "module_short": "wavesongs.util.plot",
+   "name": "set_plotter"
+  }
+ ]
+}

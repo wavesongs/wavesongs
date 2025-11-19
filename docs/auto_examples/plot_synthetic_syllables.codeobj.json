@@ -1,0 +1,612 @@
+{
+ "Model": [
+  {
+   "is_class": true,
+   "is_explicit": false,
+   "module": "wavesongs.core.bird",
+   "module_short": "wavesongs.core",
+   "name": "Model"
+  },
+  {
+   "is_class": true,
+   "is_explicit": false,
+   "module": "wavesongs.core",
+   "module_short": "wavesongs.core",
+   "name": "Model"
+  },
+  {
+   "is_class": true,
+   "is_explicit": false,
+   "module": "wavesongs",
+   "module_short": "wavesongs",
+   "name": "Model"
+  },
+  {
+   "is_class": true,
+   "is_explicit": false,
+   "module": "wavesongs.core.base",
+   "module_short": "wavesongs.core.base",
+   "name": "Model"
+  },
+  {
+   "is_class": true,
+   "is_explicit": false,
+   "module": "wavesongs.core",
+   "module_short": "wavesongs.core",
+   "name": "Model"
+  },
+  {
+   "is_class": true,
+   "is_explicit": false,
+   "module": "wavesongs",
+   "module_short": "wavesongs",
+   "name": "Model"
+  },
+  {
+   "is_class": true,
+   "is_explicit": false,
+   "module": "abc",
+   "module_short": "abc",
+   "name": "ABC"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.core.bird",
+   "module_short": "wavesongs.core",
+   "name": "Model"
+  }
+ ],
+ "ProjDirs": [
+  {
+   "is_class": true,
+   "is_explicit": false,
+   "module": "wavesongs.data",
+   "module_short": "wavesongs.data",
+   "name": "ProjDirs"
+  },
+  {
+   "is_class": true,
+   "is_explicit": false,
+   "module": "wavesongs",
+   "module_short": "wavesongs",
+   "name": "ProjDirs"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.data",
+   "module_short": "wavesongs.data",
+   "name": "ProjDirs"
+  }
+ ],
+ "Synthetic": [
+  {
+   "is_class": true,
+   "is_explicit": false,
+   "module": "wavesongs.object",
+   "module_short": "wavesongs.object",
+   "name": "Synthetic"
+  },
+  {
+   "is_class": true,
+   "is_explicit": false,
+   "module": "wavesongs",
+   "module_short": "wavesongs",
+   "name": "Synthetic"
+  },
+  {
+   "is_class": true,
+   "is_explicit": false,
+   "module": "wavesongs.object",
+   "module_short": "wavesongs.object",
+   "name": "Base"
+  },
+  {
+   "is_class": true,
+   "is_explicit": false,
+   "module": "wavesongs",
+   "module_short": "wavesongs",
+   "name": "Base"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.object",
+   "module_short": "wavesongs.object",
+   "name": "Synthetic"
+  }
+ ],
+ "curves": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "builtins",
+   "module_short": "builtins",
+   "name": "list"
+  }
+ ],
+ "fig": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "builtins",
+   "module_short": "builtins",
+   "name": "NoneType"
+  }
+ ],
+ "model": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.core.bird",
+   "module_short": "wavesongs.core",
+   "name": "Model"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.core",
+   "module_short": "wavesongs.core",
+   "name": "Model"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs",
+   "module_short": "wavesongs",
+   "name": "Model"
+  }
+ ],
+ "model.control_parameters": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.core.bird",
+   "module_short": "wavesongs.core",
+   "name": "Model.control_parameters"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.core",
+   "module_short": "wavesongs.core",
+   "name": "Model.control_parameters"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs",
+   "module_short": "wavesongs",
+   "name": "Model.control_parameters"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.core.base",
+   "module_short": "wavesongs.core.base",
+   "name": "Model.control_parameters"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.core",
+   "module_short": "wavesongs.core",
+   "name": "Model.control_parameters"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs",
+   "module_short": "wavesongs",
+   "name": "Model.control_parameters"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "abc",
+   "module_short": "abc",
+   "name": "ABC.control_parameters"
+  }
+ ],
+ "model.motor_gesture": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.core.bird",
+   "module_short": "wavesongs.core",
+   "name": "Model.motor_gesture"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.core",
+   "module_short": "wavesongs.core",
+   "name": "Model.motor_gesture"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs",
+   "module_short": "wavesongs",
+   "name": "Model.motor_gesture"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.core.base",
+   "module_short": "wavesongs.core.base",
+   "name": "Model.motor_gesture"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.core",
+   "module_short": "wavesongs.core",
+   "name": "Model.motor_gesture"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs",
+   "module_short": "wavesongs",
+   "name": "Model.motor_gesture"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "abc",
+   "module_short": "abc",
+   "name": "ABC.motor_gesture"
+  }
+ ],
+ "np.linspace": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "numpy",
+   "module_short": "numpy",
+   "name": "_ArrayFunctionDispatcher"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "numpy",
+   "module_short": "numpy",
+   "name": "linspace"
+  }
+ ],
+ "np.pi": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "builtins",
+   "module_short": "builtins",
+   "name": "float"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "numpy",
+   "module_short": "numpy",
+   "name": "pi"
+  }
+ ],
+ "np.sin": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "numpy",
+   "module_short": "numpy",
+   "name": "ufunc"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "numpy",
+   "module_short": "numpy",
+   "name": "sin"
+  }
+ ],
+ "plot.set_plotter": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "builtins",
+   "module_short": "builtins",
+   "name": "function"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.util.plot",
+   "module_short": "wavesongs.util.plot",
+   "name": "set_plotter"
+  }
+ ],
+ "plotter": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.util.plot",
+   "module_short": "wavesongs.util.plot",
+   "name": "Matplotlib"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.util",
+   "module_short": "wavesongs.util",
+   "name": "Matplotlib"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs",
+   "module_short": "wavesongs",
+   "name": "Matplotlib"
+  }
+ ],
+ "plotter.alpha_beta": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.util.plot",
+   "module_short": "wavesongs.util.plot",
+   "name": "Matplotlib.alpha_beta"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.util",
+   "module_short": "wavesongs.util",
+   "name": "Matplotlib.alpha_beta"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs",
+   "module_short": "wavesongs",
+   "name": "Matplotlib.alpha_beta"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.util.plot",
+   "module_short": "wavesongs.util.plot",
+   "name": "Base.alpha_beta"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.util",
+   "module_short": "wavesongs.util",
+   "name": "Base.alpha_beta"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs",
+   "module_short": "wavesongs",
+   "name": "Base.alpha_beta"
+  }
+ ],
+ "plotter.spectrogram": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.util.plot",
+   "module_short": "wavesongs.util.plot",
+   "name": "Matplotlib.spectrogram"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.util",
+   "module_short": "wavesongs.util",
+   "name": "Matplotlib.spectrogram"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs",
+   "module_short": "wavesongs",
+   "name": "Matplotlib.spectrogram"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.util.plot",
+   "module_short": "wavesongs.util.plot",
+   "name": "Base.spectrogram"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.util",
+   "module_short": "wavesongs.util",
+   "name": "Base.spectrogram"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs",
+   "module_short": "wavesongs",
+   "name": "Base.spectrogram"
+  }
+ ],
+ "proj_dirs": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.data",
+   "module_short": "wavesongs.data",
+   "name": "ProjDirs"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs",
+   "module_short": "wavesongs",
+   "name": "ProjDirs"
+  }
+ ],
+ "sr": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "builtins",
+   "module_short": "builtins",
+   "name": "int"
+  }
+ ],
+ "synthetic": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.object",
+   "module_short": "wavesongs.object",
+   "name": "Synthetic"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs",
+   "module_short": "wavesongs",
+   "name": "Synthetic"
+  }
+ ],
+ "synthetic.acoustical_features": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.object",
+   "module_short": "wavesongs.object",
+   "name": "Synthetic.acoustical_features"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs",
+   "module_short": "wavesongs",
+   "name": "Synthetic.acoustical_features"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.object",
+   "module_short": "wavesongs.object",
+   "name": "Base.acoustical_features"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs",
+   "module_short": "wavesongs",
+   "name": "Base.acoustical_features"
+  }
+ ],
+ "synthetic.initialize": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.object",
+   "module_short": "wavesongs.object",
+   "name": "Synthetic.initialize"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs",
+   "module_short": "wavesongs",
+   "name": "Synthetic.initialize"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.object",
+   "module_short": "wavesongs.object",
+   "name": "Base.initialize"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs",
+   "module_short": "wavesongs",
+   "name": "Base.initialize"
+  }
+ ],
+ "synthetized": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.object",
+   "module_short": "wavesongs.object",
+   "name": "Synthetic"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs",
+   "module_short": "wavesongs",
+   "name": "Synthetic"
+  }
+ ],
+ "synthetized.acoustical_features": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.object",
+   "module_short": "wavesongs.object",
+   "name": "Synthetic.acoustical_features"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs",
+   "module_short": "wavesongs",
+   "name": "Synthetic.acoustical_features"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.object",
+   "module_short": "wavesongs.object",
+   "name": "Base.acoustical_features"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs",
+   "module_short": "wavesongs",
+   "name": "Base.acoustical_features"
+  }
+ ],
+ "t": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "numpy",
+   "module_short": "numpy",
+   "name": "ndarray"
+  }
+ ],
+ "x": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "numpy",
+   "module_short": "numpy",
+   "name": "ndarray"
+  }
+ ],
+ "z": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "builtins",
+   "module_short": "builtins",
+   "name": "dict"
+  }
+ ]
+}
