@@ -55,8 +55,7 @@ from maad.sound import (
 from numpy.linalg import norm
 from scipy.interpolate import interp1d
 
-from wavesongs.data import ProjDirs
-
+from .data.manager import ProjDirs
 # typing
 from typing import Callable, Any, Literal
 
