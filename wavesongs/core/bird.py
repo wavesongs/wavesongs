@@ -47,7 +47,7 @@ from typing import (
 
 
 from .base import Model as BaseModel
-from wavesongs.utils.mathematical import rk4
+from wavesongs.utils.math import rk4
 from wavesongs.object import Synthetic, Syllable
 
 

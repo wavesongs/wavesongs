@@ -17,7 +17,39 @@ genral:
   - validation of the numerical model with experimental data from different species, oscines
   - study coupling effects in the syrinx using the numerical model
 
-qualyfitaction
+qualy
 introduction (state of art, motivation, objectives)
 methodologia ()
 cronograma
+
+
+
+
+
+
+
+
+
+
+Problem question:
+Is it possible to create quantitatively comparable synthetic bird sounds that use both pairs of lips (labia), that have two sound sources?
+- How to measure how good is a synthetic birdsong?
+
+Main Objective:
+  - Investigate the computational and biophysical modeling of a syrinx with two sound sources coupled to the vocal tract organs, trachea and orotracheal cavity (OEC).
+
+
+Specific Objectives:
+  - Create a robust, modularized, optimal, and well documented open source code of the model.
+Generate some synthetic birdsongs examples for the model evaluation, some different species with different types of syllables/calls.
+Study the dynamical behaviour of the coupling between the two sound sources with and without the vocal tract.
+
+
+Roles:
+- Marcel: main adviser
+    - Definition of the problem from computer science.
+    - DSP modeling, suitable variables and algoritms to solve the problem.
+    - Nucerical evaluation and analysis for the solution of the ocoupling system. 
+
+- Gabriel Mindlin: co-adviser
+    - Biophysical modeling and dynamical analysis, bifurcation theory with non linear dynamics. How can I modelate the coupling? 

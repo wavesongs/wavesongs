@@ -39,7 +39,7 @@ copeton_1.acoustical_features(umbral_FF=1.4, n_fft=512)
 # In this case, we are using Plotly for visualization.
 # The `spectrogram` method of the `Syllable` class is used to plot the spectrogram of the syllable.
 # The `type` parameter can be set to "2d" or "3d" for different visualizations.
-from wavesongs.utils.plot.plot import set_plotter
+from wavesongs.utils.plot import set_plotter
 
 plotter = set_plotter("plotly")
 fig = plotter.spectrogram(copeton_1, type="3d")

@@ -8,7 +8,7 @@ Pure Synthetic Syllables
 # %%
 # Synthetic Objects
 # -------------------
-from wavesongs.utils.plot import plot
+from wavesongs.utils import plot
 from wavesongs.object import Synthetic
 from wavesongs.data import ProjDirs
 
