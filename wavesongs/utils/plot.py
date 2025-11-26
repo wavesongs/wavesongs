@@ -48,6 +48,27 @@ from plotly.graph_objs import Figure as FigurePlotly
 # ws objects
 from wavesongs.object import Synthetic, Syllable, Song
 
+from wavesongs.utils.math import fitting
+
+def fittings_comparison(object, poly_deg=3, verbose=True):
+    ff = object.ff * 1e-3  # convert to kHz
+    ff_exp_fit = fitting(object, function="exponential", verbose=verbose)[0]
+    ff_poly_fit = fitting(object, function="polynomial", verbose=verbose, poly_deg=poly_deg)[0]
+    ff_sin_fit = fitting(object, function="sinusoidal", verbose=verbose)[0]
+
+
+    fig, ax = plt.subplots(1, 1, figsize=(8,5))
+    ax.plot(object.time, ff, label='Original ff', color='blue', lw=2)
+    ax.plot(object.time, ff_exp_fit, label='Exponential fit', color='green', linestyle='--')
+    ax.plot(object.time, ff_poly_fit, label=f'Polynomial fit (deg {poly_deg})', color='orange', linestyle='-.')
+    ax.plot(object.time, ff_sin_fit, label='sinusoidal fit', color='red', linestyle='--')
+    ax.set_xlabel('Time (s)')
+    ax.set_ylabel('Fundamental Frequency (kHz)')
+    ax.set_title('Fits for the Fundamental Frequency')
+    ax.legend()
+    ax.grid(True)
+    # ax.yaxis.set_major_formatter(yfmt)
+    plt.show()
 
 # %%
 def get_roi(klicker: clicker) -> list[tuple[float, float]]:
@@ -579,7 +600,7 @@ class Plotly(Base):
             waveforme : bool = False,
             grid: bool = True,
             ff: bool = False,
-            click: Literal["none", "t", "multiple"] = "none",
+            click: Literal["none", "time", "multiple"] = "none",
             legend: bool = False,
             ylim=None,
         ) -> FigurePlotly | Figure:
@@ -1175,11 +1196,11 @@ class Plotly(Base):
             row=2, col=1
         )
 
-        # Parameter Space (bifurcation diagram)
+        # -------- Parameter Space (bifurcation diagram) --------
         # Oscillation region
         mask = obj.mu1_curves[1] >= 0
         x_fill = np.concatenate([obj.mu1_curves[1][mask], obj.mu1_curves[1][mask][::-1]])
-        y_fill = np.concatenate([obj.beta_bif[mask], np.full_like(obj.beta_bif[mask], ylim[1])])
+        y_fill = np.concatenate([obj.beta_bif[mask], np.full_like(obj.beta_bif[mask], 35)]) # 35 is the max
         fig.add_trace(
             go.Scatter(
                 x=x_fill,
@@ -2420,7 +2441,7 @@ class Matplotlib(Base):
             if click == "time":
                 ax20 = ax_spectrogram.twinx()
                 ax20.set_yticks([])
-                clicker = self.klicker(fig, ax20, legend_bbox=(1.3, 0.35), settings=self._CLICKER_TIME_SETTINGS)
+                clicker = self.klicker(fig, ax20, legend_bbox=(1.02, 0.1), settings=self._CLICKER_TIME_SETTINGS)
                 clicker._leg.set_title("Clicker: ", prop={'weight': 'bold', "size": 10})
 
                 leg.set_bbox_to_anchor((0.5, 0.0))
@@ -2729,7 +2750,7 @@ class Matplotlib(Base):
         ax_alpha = fig.add_subplot(gs[0, 0])
         # ax_alpha.scatter(obj.time_s[::self.over_sample_mg], obj.alpha[::self.over_sample_mg], c=c, label="alfa")
         _ = self.colored_line(obj.time_s[::self.over_sample_mg], obj.alpha[::self.over_sample_mg],
-                             color, ax_alpha, linewidth=5, cmap=self._COLORS["motor_gesture"], label="alpha")
+                              color, ax_alpha, linewidth=5, cmap=self._COLORS["motor_gesture"], label="alpha")
         ax_alpha.set_title("Air-Sac Pressure")
         ax_alpha.set_ylabel("α (a.u.)")
         ax_alpha.set_ylim(xlim)
@@ -3503,7 +3524,7 @@ class Matplotlib(Base):
 #             ax[2].legend(loc="upper right", title="FF")
 #             ax[2].set_xlabel("Time (s)")
 #             ax[2].set_ylabel("f (khz)")
-#             ax[2].set_title(ax2_title)
+#             ax[2].set_title(, ax2_title)
 #             ax[2].yaxis.set_major_formatter(ticks)
 #             ax[2].xaxis.set_major_formatter(ticks_x)
 

@@ -965,7 +965,6 @@ class Syllable(Base):
 class Synthetic(Base):
     """
     """
-    z: dict
     beta: np.ndarray
     alpha: np.ndarray
 
@@ -1025,7 +1024,9 @@ class Synthetic(Base):
     z: dict
     time_vs: np.ndarray
 
-    id = "synthetic"
+    id: str = "synthetic"
+    z: dict = {}
+    
 
     def __init__(
             self, 

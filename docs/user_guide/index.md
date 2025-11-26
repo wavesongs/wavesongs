@@ -11,6 +11,8 @@ myst:
 
 **migrate to a generalized problem with birdsongs as the base example**
 
+**ANALYZE AND PLOT FF IN FUNCTION OF ALPHA AND BETA. HERE THE IDEA OF DISCRETIZATION CAN BE APPLIED TO GE A GRID OF THE PARAMETERS. IF THE SURFACE IS SMOTH AND COVEX AN OPTIMIZATION CAN BE SOLVED USING OPTIMIZATION?.**
+
 Instantiate
 Optimizer
 
@@ -28,6 +30,7 @@ Optimizer
   - Creating a synthetic syllable
   - Measuring in the plot
   - Segmenting syllables
+  - Make 
 - Add other models (EDO an core submodel): monkeys, frogs, cicada
 
 # User Guide

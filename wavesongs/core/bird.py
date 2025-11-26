@@ -47,7 +47,7 @@ from typing import (
 
 
 from .base import Model as BaseModel
-from wavesongs.utils.math import rk4
+from wavesongs.utils.math import rk4, gaussian
 from wavesongs.object import Synthetic, Syllable
 
 
@@ -138,7 +138,7 @@ class Model(BaseModel):
             f1: str = "ys",
             f2: str =  "(-alpha-beta*xs-xs**3+xs**2)*gamma**2 - (xs+1)*gamma*xs*ys",
             # \gamma^2(-\alpha-\beta x-x^3+x^2) - \gamma(x+1)x y,
-            ovsr: int  = 5
+            ovsr: int = 10
         ):
         
         f2_eq = f2.replace("xs", "x").replace("ys", "y").replace("alpha", '\\alpha').replace("beta", '\\beta').replace("gamma", '\\gamma').replace('**', '^')
@@ -164,39 +164,6 @@ class Model(BaseModel):
 
         This equation is obtained using the Bogdanov–Takens bifurcation :cite:p:`a-Amador2013`.
         """
-    #%%
-    def _gaussian(
-            self,
-            t: np.ndarray,
-            a0: float,
-            t0: float,
-            sigma: float = 1,
-            n: int = 1
-        ) -> np.ndarray:
-        """
-        Computes a generalized Gaussian function.
-        Parameters
-        ----------
-        t : np.ndarray
-            Input array of time or independent variable values.
-        a0 : float
-            Amplitude of the Gaussian function.
-        t0 : float
-            Center (mean) of the Gaussian function.
-        sigma : float, optional
-            Standard deviation (spread or width) of the Gaussian function. Default is 1.
-        n : int, optional
-            Exponent controlling the shape of the Gaussian. Default is 1 (standard Gaussian).
-        Returns
-        -------
-        np.ndarray
-            The computed Gaussian function values for each element in `t`.
-        Notes
-        -----
-        For `n=1`, this reduces to the standard Gaussian function. Increasing `n` makes the function sharper.
-        """
-
-        return a0 * np.exp(-((t - t0)**(2*n) / (2*sigma**(2*n))))
 
     #%%
     def bifurcation_ode(
@@ -311,7 +278,7 @@ class Model(BaseModel):
         elif mode == "linear":
             alpha = np.ndarray([a[0] for _ in t])
         elif mode == "gaussian":
-            alpha = self._gaussian(t, a[0], syllable.T/2, sigma, n) # gaussian curve
+            alpha = gaussian(t, a[0], syllable.T/2, sigma, n) # gaussian curve
         elif mode == "lissajous":
             alpha = a[0] * np.cos(2 * np.pi * z["a1"] * t + z.get("a3", 0)) # lissajous curve
         elif mode == "custom" and func is not None:
