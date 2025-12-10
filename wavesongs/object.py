@@ -861,8 +861,8 @@ class Base:
             raise Exception("This method is only available in normal terminal.")
         # sound.stop()
             
-    #%%    
-    def write_audio(self, bit_depth: int = 16) -> None:
+    #%%
+    def write_audio(self, bit_depth: int = 16, path = "", verbose=True) -> None:
         """
         
         
@@ -877,9 +877,10 @@ class Base:
             >>>
         """
         audio_name = f'{self.file_name[:-4]}-{self.id}-{self.no_syllable}.wav'
-        path_name = self.proj_dirs.examples / audio_name.replace(" ", "")
+        path_name = self.proj_dirs.examples / audio_name.replace(" ", "") if path == "" else path
         write(filename=path_name, fs=self.sr, data=self.s, bit_depth=bit_depth)
-        print(f"Audio saved at {path_name}.")
+        if verbose:
+            print(f"Audio saved at {path_name}.")
 
 #%%
 @dataclass

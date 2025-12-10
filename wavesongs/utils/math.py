@@ -30,11 +30,11 @@ def rk4(f, v: np.ndarray, dt: float):
         >>>
     """
     k1 = f(v)    
-    k2 = f(v + dt/2.0*k1)
-    k3 = f(v + dt/2.0*k2)
+    k2 = f(v + dt/2*k1)
+    k3 = f(v + dt/2*k2)
     k4 = f(v + dt*k3)
 
-    return v + dt*(2.0*(k2+k3)+k1+k4)/6.0
+    return v + dt*(2*(k2+k3)+k1+k4)/6
 
 #%%
 def gaussian(
@@ -86,55 +86,52 @@ def sinusoidal(t: np.ndarray, A: float, B: float, C: float, D: float) -> np.ndar
     """
     return A + B * np.sin(2*np.pi*(C * t + D))
 #%%
-# Exponential fit: ff = A * exp(B * t) + C
+# Exponential fit: ff = A + B * exp(C * t)
 def exponential(t: np.ndarray, A: float, B: float, C: float) -> np.ndarray:
-    return A * np.exp(B * t) + C
+    return A + B * np.exp(C * t)
 #%%
 def fitting(
-        object,
+        # object,
+        time, ff,
         function:str = "sinusoidal",
         poly_deg: int = 3,
         maxfev: int = 10000,
         verbose: bool = True
-    ) -> tuple[np.ndarray, np.ndarray]:
-    # Prepare data
-    # t = self.time
-    ff = object.ff * 1e-3 # conver to kHz
-    # time = object.time_s
-
+    ) -> tuple[np.ndarray, np.ndarray, list]:
+    
     if function == "sinusoidal":
         # Initial guess for parameters: A, B, C, D
         Av = np.mean(ff)
         A = (np.max(ff) - np.min(ff)) / 2
-        W = 1 / (object.time_s[-1] - object.time_s[0])
+        W = 1 / (time[-1] - time[0])
         P = 0
         p0 = [Av, A, W, P]
 
         # Fit the data
-        params, cov = curve_fit(sinusoidal, object.time, ff, p0=p0, maxfev=maxfev)
+        params, cov = curve_fit(sinusoidal, time, ff, p0=p0, maxfev=maxfev)
         # A_fit, B_fit, C_fit, D_fit = params
 
         # Calculate fitted values and metrics
-        ff_fit = sinusoidal(object.time, *params)
+        ff_fit = sinusoidal(time, *params)
         r2 = r2_score(ff_fit, ff)
         rmse = np.sqrt(mean_squared_error(ff_fit, ff))
-        # metrics = [r2, rmse]
+        metrics = [r2, rmse, cov]
 
     elif function == "exponential":
         p0 = [np.max(ff), -1.0, np.min(ff)]
-        params, _ = curve_fit(exponential, object.time, ff, p0=p0, maxfev=maxfev)
-        ff_fit = exponential(object.time, *params)
+        params, _ = curve_fit(exponential, time, ff, p0=p0, maxfev=maxfev)
+        ff_fit = exponential(time, *params)
         r2 = r2_score(ff_fit, ff)
         rmse = np.sqrt(mean_squared_error(ff_fit, ff))
-        # metrics = [r2, rmse]
+        metrics = [r2, rmse]
 
     elif function == "polynomial":
-        fit = Polynomial.fit(object.time, ff, deg=poly_deg)
-        params = fit.coef
-        ff_fit = fit(object.time)
+        fit = Polynomial.fit(time, ff, deg=poly_deg)
+        params = fit.coef[::-1]  # Reverse to standard order
+        ff_fit = fit(time)
         r2 = r2_score(ff_fit, ff)
         rmse = np.sqrt(mean_squared_error(ff_fit, ff))
-        # metrics = [r2, rmse]
+        metrics = [r2, rmse]
     elif function == "custom":
         pass
 
@@ -145,4 +142,4 @@ def fitting(
         print(f'{function} fit metrics: R^2={r2:.4f}, RMSE={rmse:.4f}\n',
               f'{function}: {params}')
     
-    return ff_fit, params# , metrics
+    return ff_fit, params, metrics

@@ -3,7 +3,8 @@
 - Cómo calcula el alpha, ya que el beta es propuesto. Se calcula b(f0) es una cuadratica, por qué?
 - plantear un espacio de represntacion (gaussianas, polynomios, o solo polynomios)Tiene sentido pensar que beta son impulsos de aire gaussianos y los betas se pueden parametrizar como figuras de lissajaous?
 - Acoplamiento de dos syringes
--  
+- Varying gamma for bats or frogs
+- The control parameters have a minimum, does they have a maximum values also? It is related to maximum velocity contraint?
 
 
 is it good to have genral and specific objectives?

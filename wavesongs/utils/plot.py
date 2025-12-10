@@ -50,25 +50,31 @@ from wavesongs.object import Synthetic, Syllable, Song
 
 from wavesongs.utils.math import fitting
 
-def fittings_comparison(object, poly_deg=3, verbose=True):
-    ff = object.ff * 1e-3  # convert to kHz
-    ff_exp_fit = fitting(object, function="exponential", verbose=verbose)[0]
-    ff_poly_fit = fitting(object, function="polynomial", verbose=verbose, poly_deg=poly_deg)[0]
-    ff_sin_fit = fitting(object, function="sinusoidal", verbose=verbose)[0]
-
+def fittings_comparison(time, ff, poly_deg=3, scale=1e-3, 
+                        verbose=True, grid=True, variable="Fundamental Frequency", 
+                        unit='kHz'):
+    # ff = object.ff * 1e-3  # convert to kHz
+    ff_sin_fit = fitting(time, ff, function="sinusoidal", verbose=verbose)[0]
+    ff_poly_fit = fitting(time, ff, function="polynomial", verbose=verbose, poly_deg=poly_deg)[0]
 
     fig, ax = plt.subplots(1, 1, figsize=(8,5))
-    ax.plot(object.time, ff, label='Original ff', color='blue', lw=2)
-    ax.plot(object.time, ff_exp_fit, label='Exponential fit', color='green', linestyle='--')
-    ax.plot(object.time, ff_poly_fit, label=f'Polynomial fit (deg {poly_deg})', color='orange', linestyle='-.')
-    ax.plot(object.time, ff_sin_fit, label='sinusoidal fit', color='red', linestyle='--')
+    ax.plot(time, scale*ff, label='Original', color='blue', lw=2)
+    ax.plot(time, scale*ff_poly_fit, label=f'Polynomial fit (deg {poly_deg})', color='orange', linestyle='-.')
+    ax.plot(time, scale*ff_sin_fit, label='sinusoidal fit', color='red', linestyle='--')
+    try:
+        ff_exp_fit = fitting(time, ff, function="exponential", verbose=verbose)[0]
+        ax.plot(time, scale*ff_exp_fit, label='Exponential fit', color='green', linestyle='--')
+    except:
+        if verbose:
+            print("Exponential fit could not be computed.")
     ax.set_xlabel('Time (s)')
-    ax.set_ylabel('Fundamental Frequency (kHz)')
-    ax.set_title('Fits for the Fundamental Frequency')
+    ax.set_ylabel(f"{variable} ({unit})")
+    ax.set_title(f'Fits for the {variable}')
     ax.legend()
-    ax.grid(True)
+    ax.grid(grid)
     # ax.yaxis.set_major_formatter(yfmt)
     plt.show()
+
 
 # %%
 def get_roi(klicker: clicker) -> list[tuple[float, float]]:
@@ -1237,17 +1243,6 @@ class Plotly(Base):
             ),
             row=1, col=2
         )
-        # Motor Gesture (alpha, beta)
-        fig.add_trace(
-            go.Scatter(
-                x=obj.alpha[::self.over_sample_mg], y=obj.beta[::self.over_sample_mg],
-                mode='markers',
-                marker=dict(color=c_hex[::self.over_sample_mg], size=10), # , symbol='line-ew'
-                name="Motor Gesture",
-                hovertemplate=f"<b>Motor Gesture</b><br><b>  Alpha</b>: %{{x:.2f}}<br><b>  Beta</b>: %{{y:.2f}}<extra></extra>",
-            ),
-            row=1, col=2
-        )
         # Saddle-Node Bifurcation curves
         fig.add_trace(
             go.Scatter(
@@ -1266,6 +1261,17 @@ class Plotly(Base):
                 line=dict(color='green', width=2),
                 name="SN Bifurcation 2",
                 hovertemplate=f"<b>Saddle-Node</b><br><b>  Alpha</b>: %{{x:.2f}}<br><b>  Beta</b>: %{{y:.2f}}<extra></extra>",
+            ),
+            row=1, col=2
+        )
+        # Motor Gesture (alpha, beta)
+        fig.add_trace(
+            go.Scatter(
+                x=obj.alpha[::self.over_sample_mg], y=obj.beta[::self.over_sample_mg],
+                mode='markers',
+                marker=dict(color=c_hex[::self.over_sample_mg], size=10), # , symbol='line-ew'
+                name="Motor Gesture",
+                hovertemplate=f"<b>Motor Gesture</b><br><b>  Alpha</b>: %{{x:.2f}}<br><b>  Beta</b>: %{{y:.2f}}<extra></extra>",
             ),
             row=1, col=2
         )

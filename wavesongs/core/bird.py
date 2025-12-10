@@ -51,6 +51,88 @@ from wavesongs.utils.math import rk4, gaussian
 from wavesongs.object import Synthetic, Syllable
 
 
+_PARAMS = {
+    "gm": 4e4,       # time scaling constant
+    # -------------------------------- Trachea --------------------------------
+    "C": 343,        # speed of sound in media [m/s]
+    "L": 0.025,      # trachea length [m]
+    "r": 0.65,       # reflection coeficient [adimensionelss]
+    # ------------------------- Beak, Glottis and OEC -------------------------
+    "Ch": 1.43E-10,  # OEC Compliance [m^3/Pa]
+    "MG": 20,        # Beak Inertance [Pa s^2/m^3 = kg/m^4]
+    "MB": 1E4,       # Glottis Inertance [Pa s^2/m^3 = kg/m^4]
+    "RB": 5E6,       # Beak Resistance [Pa s/m^3 = kg/m^4 s]
+    "Rh": 24E3       # OEC Resistence [Pa s/m^3 = kg/m^4 s]
+}
+
+#%%
+class Syrinx():
+    
+    def __init__(self, gamma=_PARAMS['gm']):
+        """
+        Syrinx model equations
+        """
+        self.gamma = gamma
+    
+    def update(self, dv, v, t, alpha, beta, f1, f2, ovsr):
+        x, y, _, _, _, _ = v
+        dv[0] = f1(x, y, alpha[t//ovsr], beta[t//ovsr], self.gamma)
+        dv[1] = f2(x, y, alpha[t//ovsr], beta[t//ovsr], self.gamma)
+
+        return dv
+#%%
+class Trache():
+    def __init__(self, tmax, r=_PARAMS['r'], L=_PARAMS['L'], c=_PARAMS['C']):
+        """
+        Trache model equations
+        """
+        # trachea pressure pback and pin vectors initialization
+        self.pi = np.zeros(tmax) # input pressure
+        self.pb = np.zeros(tmax) # pressure back
+
+        self.r = r
+        self.L = L
+        self.c = c
+
+    def update(self, dv, t, alpha, dt, ovsr, *pargs):
+        self.pbold = self.pb[t] # pressure back before
+        # Pin(t) = Ay(t) + pback(t-L/C) = Signal_env*v[1] + pb[t-L/C/dt]
+        # pi[t] = (0.5*syllable.envelope[t//ovsr])*dv[1] + pb[t-int(L/c/dt)]
+        # A = 1 #(0.5*syllable.envelope[t//ovsr])
+        alpha_mean = alpha[:t//ovsr].mean()
+        # A = 1 # alpha[:t//ovsr].mean()
+        A = 0 if isnan(alpha_mean) else alpha_mean
+        self.pi[t] = A*dv[1] + self.pb[t-int(self.L/self.c/dt)]
+        self.pb[t] = -self.r*self.pi[t-int(self.L/self.c/dt)]    # pressure back: -rPin(t-L/C)
+        self.pout = (1-self.r)*self.pi[t-int(self.L/self.c/dt)]
+        # ---------------------------------------------------------------
+        dv[2] = (self.pb[t]-self.pbold)/dt # dpout
+        
+        return dv, self.pout
+#%%
+class OEC():
+    
+    def __init__(self, Ch=_PARAMS['Ch'], MG=_PARAMS['MG'], MB=_PARAMS['MB'], RB=_PARAMS['RB'], Rh=_PARAMS['Rh']):
+        """
+        OEC model equations
+        """
+        self.Ch = Ch
+        self.MG = MG
+        self.MB = MB
+        self.RB = RB
+        self.Rh = Rh
+
+    def update(self, dv, pout, v, *pargs):
+        _, _, _, i1, i2, i3 = v
+        # ----------------------- OEC EDOs -----------------------
+        dv[3] = i2
+        dv[4] = -(1/self.Ch/self.MG)*i1 - self.Rh*(1/self.MB+1/self.MG)*i2 \
+                + (1/self.MG/self.Ch+self.Rh*self.RB/self.MG/self.MB)*i3 + (1/self.MG)*dv[2] \
+                + (self.Rh*self.RB/self.MG/self.MB)*pout
+        dv[5] = -(self.MG/self.MB)*i2 - (self.Rh/self.MB)*i3 + (1/self.MB)*pout
+        return dv
+
+#%%
 class Model(BaseModel):
     """Model for the motor gesture of birdsongs.
     Bogdanov–Takens bifurcation
@@ -127,7 +209,7 @@ class Model(BaseModel):
     _mu_parameters = (_mu1_alpha, _mu2_beta)
     # General nonlinear equation model of second order
 
-    _V_MAX = -5e6 # model constraint
+    _V_MAX = 5e6 # model constraint # -5e6
     """float : Maximum labia walls velocity.
     """
     
@@ -305,6 +387,7 @@ class Model(BaseModel):
         beta = self.beta(syllable, z, beta_mode, poly_order, func, **kwargs)
 
         return [alpha, beta]
+    
     #%%
     def motor_gesture(
             self,
@@ -365,9 +448,10 @@ class Model(BaseModel):
             dv = np.zeros(6)
             x, y, pout, i1, i2, i3 = v
             # ----------------- direct implementation of the EDOs -----------
+            # ------------------------- SYRINX ------------------------
             dv[0] = f1(x, y, alpha[t//self.ovsr], beta[t//self.ovsr], gamma)
             dv[1] = f2(x, y, alpha[t//self.ovsr], beta[t//self.ovsr], gamma)
-            # ------------------------- trachea ------------------------
+            # ------------------------- TRACHEA ------------------------
             pbold = pb[t] # pressure back before
             # Pin(t) = Ay(t) + pback(t-L/C) = Signal_env*v[1] + pb[t-L/C/dt]
             # pi[t] = (0.5*syllable.envelope[t//ovsr])*dv[1] + pb[t-int(L/c/dt)]
@@ -388,7 +472,7 @@ class Model(BaseModel):
             dv[5] = -(MG/MB)*i2 - (Rh/MB)*i3 + (1/MB)*pout
             return dv
         # ----------------------- Update EDOs Variables ----------------------
-        while t < tmax and np.abs(v[1]) > self._V_MAX:
+        while t < tmax and np.abs(v[1]) < self._V_MAX:
             v = rk4(ODEs, v, dt)        # RK4 step
             vs.append(v)                # save step # vs[t] = v
             out[t//self.ovsr] = RB*v[-1]    # update output signal (synthetic)
@@ -402,7 +486,7 @@ class Model(BaseModel):
             proj_dirs = syllable.proj_dirs,
             metadata = {
                 "type": "",
-                "no_syllable":  0,
+                "no_syllable": 0,
             },
         )
 
