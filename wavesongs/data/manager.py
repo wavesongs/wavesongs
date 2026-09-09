@@ -149,7 +149,6 @@ last =   '└── '
 _CATALOG_LABEL = "ML Catalog Number"
 _AUDIO_FORMATS = (".mp3", ".wav")
 
-
 # Syllable = TypeVar('Syllable')
 #%%
 class ProjDirs:

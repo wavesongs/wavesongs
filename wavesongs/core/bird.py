@@ -414,35 +414,44 @@ class Model(BaseModel):
 
         """
         # rk4 constans
-        t = 0                                    # initial time
-        tmax = int(syllable.s.size * self.ovsr - 1)  # maximum time
-        dt = 1 / (self.ovsr * syllable.sr)           # step
-        out = np.zeros(syllable.s.size)          # output pressure, FINAL SIGNAL
+        t = 0                                        # initial time
+        N = self.ovsr * syllable.sr                  # Total No of samples
+        dt = 1 / N                                   # time step in seconds by samples
+        tmax = int(syllable.s.size * self.ovsr - 1)  # maximum time in samples
+        out = np.zeros(syllable.s.size)              # output pressure, FINAL SIGNAL
 
         # trachea pressure pback and pin vectors initialization
         pi = np.zeros(tmax)              # input pressure
         pb = np.zeros(tmax)              # pressure back
 
         # initial vector ODEs (v0), it is not too relevant
-        v = 1e-4 * np.array([1e2, 1e1, 1, 1, 1, 1])
+        v = 1e-4 * np.array([1e2, 1e1, 1, 1, 1, 1]) # v0
         vs = [v] # np.zeros(tmax)
         # ------------- MG BIRD MODEL PARAMETERS -----------
         ## Syrinx
         gamma = params["gm"]
         ## Trachea
-        r = params['r']
-        L = params['L']
-        c = params['C']
+        r, L, c = (params[k] for k in ("r", "L", "C"))
+
+        # r = params['r']
+        # L = params['L']
+        # c = params['C']
         ## OEC
-        Ch = params['Ch']
-        MG = params['MG']
-        MB = params['MB']
-        RB = params['RB']
-        Rh = params['Rh']
+        Ch, MG, MB, RB, Rh = (params[k] for k in ("Ch", "MG", "MB", "RB", "Rh"))
+        # Ch = params['Ch']
+        # MG = params['MG']
+        # MB = params['MB']
+        # RB = params['RB']
+        # Rh = params['Rh']
+
         # ----------------------------------------------------
         alpha, beta = curves
         ## ------------- Bogdanov–Takens bifurcation ------------------
         beta_bif, mu1_curves, f1, f2 = self.bifurcation_ode()
+        params_kwargs = dict(
+            gamma=gamma, r=r, L=L, c=c, f1=f1, f2=f2,
+            Ch=Ch, MG=MG, MB=MB, RB=RB, Rh=Rh
+        )
         # ------------------------------ Physical Model -----------------------------
         def ODEs(v: np.ndarray) -> np.ndarray:
             dv = np.zeros(6)
@@ -452,29 +461,29 @@ class Model(BaseModel):
             dv[0] = f1(x, y, alpha[t//self.ovsr], beta[t//self.ovsr], gamma)
             dv[1] = f2(x, y, alpha[t//self.ovsr], beta[t//self.ovsr], gamma)
             # ------------------------- TRACHEA ------------------------
-            pbold = pb[t] # pressure back before
             # Pin(t) = Ay(t) + pback(t-L/C) = Signal_env*v[1] + pb[t-L/C/dt]
             # pi[t] = (0.5*syllable.envelope[t//ovsr])*dv[1] + pb[t-int(L/c/dt)]
             # A = 1 #(0.5*syllable.envelope[t//ovsr])
             alpha_mean = alpha[:t//self.ovsr].mean()
             # A = 1 # alpha[:t//self.ovsr].mean()
             A = 0 if isnan(alpha_mean) else alpha_mean
-            pi[t] = A*dv[1] + pb[t-int(L/c/dt)]
-            pb[t] = -r*pi[t-int(L/c/dt)]    # pressure back: -rPin(t-L/C)
-            pout = (1-r)*pi[t-int(L/c/dt)]  # pout
+            pbold = pb[t] # pressure back before
+            pi[t] = A*dv[1] + pb[t-int(L/c/dt)] # Pi(t) = Ay(t) + pback(t-L/C)
+            pb[t] = -r*pi[t-int(L/c/dt)]        # Pb(t) = -rPin(t-L/C)
+            pout = (1-r)*pi[t-int(L/c/dt)]      # Pout(t) = (1-r)*Pin(t-L/C), dt:1 sec by samples
             # ---------------------------------------------------------------
             dv[2] = (pb[t]-pbold)/dt # dpout
             # ----------------------- OEC EDOs -----------------------
-            dv[3] = i2
+            dv[3] = i2                                            # i1'
             dv[4] = -(1/Ch/MG)*i1 - Rh*(1/MB+1/MG)*i2 \
                     + (1/MG/Ch+Rh*RB/MG/MB)*i3 + (1/MG)*dv[2] \
-                    + (Rh*RB/MG/MB)*pout
-            dv[5] = -(MG/MB)*i2 - (Rh/MB)*i3 + (1/MB)*pout
+                    + (Rh*RB/MG/MB)*pout                          # i2'
+            dv[5] = -(MG/MB)*i2 - (Rh/MB)*i3 + (1/MB)*pout        # i3'
             return dv
         # ----------------------- Update EDOs Variables ----------------------
         while t < tmax and np.abs(v[1]) < self._V_MAX:
-            v = rk4(ODEs, v, dt)        # RK4 step
-            vs.append(v)                # save step # vs[t] = v
+            v = rk4(ODEs, v, dt)            # RK4 step
+            vs.append(v)                    # save step # vs[t] = v
             out[t//self.ovsr] = RB*v[-1]    # update output signal (synthetic)
             t += 1
         # ------------------------------------------------------------

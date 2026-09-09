@@ -54,3 +54,4 @@ This is a dictionary with `key: val` pairs that you can configure in various way
 
 install
 ```
+

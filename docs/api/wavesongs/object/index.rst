@@ -127,7 +127,7 @@ Module Contents
 
 
 
-   .. py:method:: write_audio(bit_depth = 16)
+   .. py:method:: write_audio(bit_depth = 16, path='', verbose=True)
 
       
       .. rubric:: Examples
@@ -471,6 +471,7 @@ Module Contents
 
 
    .. py:attribute:: id
+      :type:  str
       :value: 'synthetic'
 
 

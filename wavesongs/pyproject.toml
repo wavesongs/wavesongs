@@ -1,0 +1,17 @@
+[project]
+name = "wavesongs"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "saguileran", email = "saguileran@unal.edu.co" }
+]
+requires-python = ">=3.11, <4.0"
+dependencies = []
+
+[project.scripts]
+wavesongs = "wavesongs:main"
+
+[build-system]
+requires = ["uv_build>=0.12.12,<0.13.0"]
+build-backend = "uv_build"

@@ -9,48 +9,36 @@ wavesongs.core.bird
 
 
 
+Attributes
+----------
+
+.. autoapisummary::
+
+   wavesongs.core.bird._PARAMS
+
+
 Classes
 -------
 
 .. autoapisummary::
 
    wavesongs.core.bird.Model
+   wavesongs.core.bird.OEC
    wavesongs.core.bird.Solver
+   wavesongs.core.bird.Syrinx
+   wavesongs.core.bird.Trache
 
 
 Module Contents
 ---------------
 
-.. py:class:: Model(f1 = 'ys', f2 = '(-alpha-beta*xs-xs**3+xs**2)*gamma**2 - (xs+1)*gamma*xs*ys')
+.. py:class:: Model(f1 = 'ys', f2 = '(-alpha-beta*xs-xs**3+xs**2)*gamma**2 - (xs+1)*gamma*xs*ys', ovsr = 10)
 
    Bases: :py:obj:`wavesongs.core.base.Model`
 
 
    Model for the motor gesture of birdsongs.
    Bogdanov–Takens bifurcation
-
-
-   .. py:method:: _gaussian(t, a0, t0, sigma = 1, n = 1)
-
-      Computes a generalized Gaussian function.
-      :param t: Input array of time or independent variable values.
-      :type t: np.ndarray
-      :param a0: Amplitude of the Gaussian function.
-      :type a0: float
-      :param t0: Center (mean) of the Gaussian function.
-      :type t0: float
-      :param sigma: Standard deviation (spread or width) of the Gaussian function. Default is 1.
-      :type sigma: float, optional
-      :param n: Exponent controlling the shape of the Gaussian. Default is 1 (standard Gaussian).
-      :type n: int, optional
-
-      :returns: The computed Gaussian function values for each element in `t`.
-      :rtype: np.ndarray
-
-      .. rubric:: Notes
-
-      For `n=1`, this reduces to the standard Gaussian function. Increasing `n` makes the function sharper.
-
 
 
    .. py:method:: alpha(syllable, z = _Z, mode = 'gaussian', poly_order = 3, func = None, **kwargs)
@@ -200,7 +188,7 @@ Module Contents
 
 
    .. py:attribute:: _V_MAX
-      :value: -5000000.0
+      :value: 5000000.0
 
 
       Maximum labia walls velocity.
@@ -247,13 +235,47 @@ Module Contents
    .. py:attribute:: _mu_parameters
 
 
-   .. py:attribute:: _ovsr
+   .. py:attribute:: _prct_noise
+      :value: 0
+
+
+
+   .. py:attribute:: ovsr
+      :value: 10
+
+
+      Oversample for the RK4
+
+      :type: int
+
+
+.. py:class:: OEC(Ch=_PARAMS['Ch'], MG=_PARAMS['MG'], MB=_PARAMS['MB'], RB=_PARAMS['RB'], Rh=_PARAMS['Rh'])
+
+   .. py:method:: update(dv, pout, v, *pargs)
+
+
+   .. py:attribute:: Ch
+      :value: 1.43e-10
+
+
+
+   .. py:attribute:: MB
+      :value: 10000.0
+
+
+
+   .. py:attribute:: MG
       :value: 20
 
 
 
-   .. py:attribute:: _prct_noise
-      :value: 0
+   .. py:attribute:: RB
+      :value: 5000000.0
+
+
+
+   .. py:attribute:: Rh
+      :value: 24000.0
 
 
 
@@ -562,4 +584,42 @@ Module Contents
 
       list array with the model parameters [a0, b0, b1, b2]
 
+
+.. py:class:: Syrinx(gamma=_PARAMS['gm'])
+
+   .. py:method:: update(dv, v, t, alpha, beta, f1, f2, ovsr)
+
+
+   .. py:attribute:: gamma
+      :value: 40000.0
+
+
+
+.. py:class:: Trache(tmax, r=_PARAMS['r'], L=_PARAMS['L'], c=_PARAMS['C'])
+
+   .. py:method:: update(dv, t, alpha, dt, ovsr, *pargs)
+
+
+   .. py:attribute:: L
+      :value: 0.025
+
+
+
+   .. py:attribute:: c
+      :value: 343
+
+
+
+   .. py:attribute:: pb
+
+
+   .. py:attribute:: pi
+
+
+   .. py:attribute:: r
+      :value: 0.65
+
+
+
+.. py:data:: _PARAMS
 

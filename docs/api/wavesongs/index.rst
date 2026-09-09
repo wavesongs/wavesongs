@@ -16,11 +16,10 @@ Submodules
 .. toctree::
    :maxdepth: 1
 
-   /api/wavesongs/ai/index
    /api/wavesongs/core/index
    /api/wavesongs/data/index
    /api/wavesongs/object/index
-   /api/wavesongs/util/index
+   /api/wavesongs/utils/index
 
 
 Attributes

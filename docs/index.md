@@ -12,7 +12,7 @@ html_theme.sidebar_secondary.remove: false
 **WaveSongs**  is a Python package designed to generate synthetic songs (currently focused on birdsongs) from audio recordings.
 
 ```{eval-rst}
-The package utilizes the `motor gestures model for birdsong <http://www.lsd.df.uba.ar/papers/simplemotorgestures.pdf>`_ developed by `Gabo Mindlin <https://scholar.google.com.ar/citations?user=gMzZPngAAAAJ&hl=en>`_ to generate synthetic birdsongs through numerical optimization :cite:p:`b-birdsongs_book,a-Amador2013`. By leveraging **fundamental frequency (FF)** and **spectral content index (SCI)** as key parameters. The package solves a minimization problem using `SciPy <https://docs.scipy.org/doc/scipy/tutorial/optimize.html>`_ :cite:p:`s-2020SciPy` and performs audio analysis with `librosa <https://librosa.org/>`_  :cite:p:`s-McFee2015librosa` and `scikit-maad <https://scikit-maad.github.io/>`_ :cite:p:`s-maad`.  This combination of tools enables the precise and realistic synthesis of birdsongs, achieving relative errors in fundamental frequency (FF) of less than 1%. [#f1]_
+The package utilizes the `motor gestures model for birdsong <http://www.lsd.df.uba.ar/papers/simplemotorgestures.pdf>`_ developed by `Gabo Mindlin <https://scholar.google.com.ar/citations?user=gMzZPngAAAAJ&hl=en>`_ to generate synthetic birdsongs through numerical optimization :cite:p:`b-birdsongs_book,a-Amador2013`. By leveraging **fundamental frequency (FF)** and **spectral content index (SCI)** as key parameters. The package solves a minimization problem using `SciPy <https://docs.scipy.org/doc/scipy/tutorial/optimize.html>`_ :cite:p:`s-2020SciPy` and performs audio analysis with `librosa <https://librosa.org/>`_  :cite:p:`s-McFee2015librosa` and `scikit-maad <https://scikit-maad.github.io/>`_ :cite:p:`s-maad`.  This combination of tools enables the precise and realistic synthesis of birdsongs, achieving relative errors in fundamental frequency (FF) of less than 1%. [1]_
 ```
 
 ## ⚒️ Installation
@@ -20,8 +20,6 @@ The package utilizes the `motor gestures model for birdsong <http://www.lsd.df.u
 There are two ways to install wavesongs: a single line code installation via pypi, or a manual installation to get the latest  developer version. Check the :ref:`️installation` guide for more details.  
 
 Now, let’s dive into the package! Check out the :ref:`getting_started` guide to learn how to analyze recordings and create synthetic syllables. You can download recording samples from the :ref:`download_samples` guide.
-
-
 
 
 ## 🌱 Contribute
@@ -59,11 +57,10 @@ API <api/index>
 ```
 
 
-## Examples 1
+## Examples
 
 ```{toctree}
 :maxdepth: 2
-:hidden:
 
 auto_examples/index
 ```
@@ -83,31 +80,19 @@ If this work contributes to your research, please cite:
 }
 ```
 
-## 📚 References
+
+## 📚References
+
+```{toctree}
+:maxdepth: 1
+
+references/index
+```
+
+---
+
+## Foot Notes
 
 ```{eval-rst}
-.. rubric:: Articles
-
-.. bibliography:: references/articles.bib
-   :keyprefix: a-
-   :labelprefix: A
-
-
-.. rubric:: Books
-
-.. bibliography:: references/references.bib
-   :keyprefix: b-
-   :labelprefix: B
-
-.. rubric:: Software
-   
-.. bibliography:: references/software.bib
-   :all:
-   :keyprefix: s-
-   :labelprefix: S
-
-.. rubric:: Footnotes
-
-.. [#f1] The model performance depends on the syllable quaility and type. Complex syllables may have higher errors. The best performance is obtained in simple syllables well defined without noise and not strong harmonics.
-
+.. [1] The model performance depends on the syllable quaility and type. Complex syllables may have higher errors. The best performance is obtained in simple syllables well defined without noise and not strong harmonics.
 ```

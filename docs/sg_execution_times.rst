@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**01:00.478** total execution time for 2 files **from all galleries**:
+**00:54.156** total execution time for 2 files **from all galleries**:
 
 .. container::
 
@@ -33,8 +33,8 @@ Computation times
      - Time
      - Mem (MB)
    * - :ref:`sphx_glr_auto_examples_plot_synthetic_syllables.py` (``../examples/plot_synthetic_syllables.py``)
-     - 01:00.478
-     - 568.3
+     - 00:54.156
+     - 458.0
    * - :ref:`sphx_glr_auto_examples_plot_syllable_example.py` (``../examples/plot_syllable_example.py``)
      - 00:00.000
      - 0.0

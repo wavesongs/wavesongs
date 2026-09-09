@@ -18,6 +18,7 @@ Submodules
    /api/wavesongs/core/base/index
    /api/wavesongs/core/bird/index
    /api/wavesongs/core/example/index
+   /api/wavesongs/core/solver/index
 
 
 Classes
@@ -32,36 +33,13 @@ Classes
 Package Contents
 ----------------
 
-.. py:class:: Model(f1 = 'ys', f2 = '(-alpha-beta*xs-xs**3+xs**2)*gamma**2 - (xs+1)*gamma*xs*ys')
+.. py:class:: Model(f1 = 'ys', f2 = '(-alpha-beta*xs-xs**3+xs**2)*gamma**2 - (xs+1)*gamma*xs*ys', ovsr = 10)
 
    Bases: :py:obj:`wavesongs.core.base.Model`
 
 
    Model for the motor gesture of birdsongs.
    Bogdanov–Takens bifurcation
-
-
-   .. py:method:: _gaussian(t, a0, t0, sigma = 1, n = 1)
-
-      Computes a generalized Gaussian function.
-      :param t: Input array of time or independent variable values.
-      :type t: np.ndarray
-      :param a0: Amplitude of the Gaussian function.
-      :type a0: float
-      :param t0: Center (mean) of the Gaussian function.
-      :type t0: float
-      :param sigma: Standard deviation (spread or width) of the Gaussian function. Default is 1.
-      :type sigma: float, optional
-      :param n: Exponent controlling the shape of the Gaussian. Default is 1 (standard Gaussian).
-      :type n: int, optional
-
-      :returns: The computed Gaussian function values for each element in `t`.
-      :rtype: np.ndarray
-
-      .. rubric:: Notes
-
-      For `n=1`, this reduces to the standard Gaussian function. Increasing `n` makes the function sharper.
-
 
 
    .. py:method:: alpha(syllable, z = _Z, mode = 'gaussian', poly_order = 3, func = None, **kwargs)
@@ -211,7 +189,7 @@ Package Contents
 
 
    .. py:attribute:: _V_MAX
-      :value: -5000000.0
+      :value: 5000000.0
 
 
       Maximum labia walls velocity.
@@ -258,14 +236,18 @@ Package Contents
    .. py:attribute:: _mu_parameters
 
 
-   .. py:attribute:: _ovsr
-      :value: 20
-
-
-
    .. py:attribute:: _prct_noise
       :value: 0
 
+
+
+   .. py:attribute:: ovsr
+      :value: 10
+
+
+      Oversample for the RK4
+
+      :type: int
 
 
 .. py:class:: Solver(model = Model(), order = 2)

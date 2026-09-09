@@ -61,6 +61,13 @@
   {
    "is_class": true,
    "is_explicit": false,
+   "module": "wavesongs.data.manager",
+   "module_short": "wavesongs.data.manager",
+   "name": "ProjDirs"
+  },
+  {
+   "is_class": true,
+   "is_explicit": false,
    "module": "wavesongs.data",
    "module_short": "wavesongs.data",
    "name": "ProjDirs"
@@ -75,8 +82,8 @@
   {
    "is_class": false,
    "is_explicit": false,
-   "module": "wavesongs.data",
-   "module_short": "wavesongs.data",
+   "module": "wavesongs.data.manager",
+   "module_short": "wavesongs.data.manager",
    "name": "ProjDirs"
   }
  ],
@@ -319,8 +326,8 @@
   {
    "is_class": false,
    "is_explicit": false,
-   "module": "wavesongs.util.plot",
-   "module_short": "wavesongs.util.plot",
+   "module": "wavesongs.utils.plot",
+   "module_short": "wavesongs.utils.plot",
    "name": "set_plotter"
   }
  ],
@@ -328,15 +335,15 @@
   {
    "is_class": false,
    "is_explicit": false,
-   "module": "wavesongs.util.plot",
-   "module_short": "wavesongs.util.plot",
+   "module": "wavesongs.utils.plot",
+   "module_short": "wavesongs.utils.plot",
    "name": "Matplotlib"
   },
   {
    "is_class": false,
    "is_explicit": false,
-   "module": "wavesongs.util",
-   "module_short": "wavesongs.util",
+   "module": "wavesongs.utils",
+   "module_short": "wavesongs.utils",
    "name": "Matplotlib"
   },
   {
@@ -351,15 +358,15 @@
   {
    "is_class": false,
    "is_explicit": false,
-   "module": "wavesongs.util.plot",
-   "module_short": "wavesongs.util.plot",
+   "module": "wavesongs.utils.plot",
+   "module_short": "wavesongs.utils.plot",
    "name": "Matplotlib.alpha_beta"
   },
   {
    "is_class": false,
    "is_explicit": false,
-   "module": "wavesongs.util",
-   "module_short": "wavesongs.util",
+   "module": "wavesongs.utils",
+   "module_short": "wavesongs.utils",
    "name": "Matplotlib.alpha_beta"
   },
   {
@@ -372,15 +379,15 @@
   {
    "is_class": false,
    "is_explicit": false,
-   "module": "wavesongs.util.plot",
-   "module_short": "wavesongs.util.plot",
+   "module": "wavesongs.utils.plot",
+   "module_short": "wavesongs.utils.plot",
    "name": "Base.alpha_beta"
   },
   {
    "is_class": false,
    "is_explicit": false,
-   "module": "wavesongs.util",
-   "module_short": "wavesongs.util",
+   "module": "wavesongs.utils",
+   "module_short": "wavesongs.utils",
    "name": "Base.alpha_beta"
   },
   {
@@ -395,15 +402,15 @@
   {
    "is_class": false,
    "is_explicit": false,
-   "module": "wavesongs.util.plot",
-   "module_short": "wavesongs.util.plot",
+   "module": "wavesongs.utils.plot",
+   "module_short": "wavesongs.utils.plot",
    "name": "Matplotlib.spectrogram"
   },
   {
    "is_class": false,
    "is_explicit": false,
-   "module": "wavesongs.util",
-   "module_short": "wavesongs.util",
+   "module": "wavesongs.utils",
+   "module_short": "wavesongs.utils",
    "name": "Matplotlib.spectrogram"
   },
   {
@@ -416,15 +423,15 @@
   {
    "is_class": false,
    "is_explicit": false,
-   "module": "wavesongs.util.plot",
-   "module_short": "wavesongs.util.plot",
+   "module": "wavesongs.utils.plot",
+   "module_short": "wavesongs.utils.plot",
    "name": "Base.spectrogram"
   },
   {
    "is_class": false,
    "is_explicit": false,
-   "module": "wavesongs.util",
-   "module_short": "wavesongs.util",
+   "module": "wavesongs.utils",
+   "module_short": "wavesongs.utils",
    "name": "Base.spectrogram"
   },
   {
@@ -436,6 +443,13 @@
   }
  ],
  "proj_dirs": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.data.manager",
+   "module_short": "wavesongs.data.manager",
+   "name": "ProjDirs"
+  },
   {
    "is_class": false,
    "is_explicit": false,
@@ -534,6 +548,36 @@
    "module": "wavesongs",
    "module_short": "wavesongs",
    "name": "Base.initialize"
+  }
+ ],
+ "synthetic.play": [
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.object",
+   "module_short": "wavesongs.object",
+   "name": "Synthetic.play"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs",
+   "module_short": "wavesongs",
+   "name": "Synthetic.play"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs.object",
+   "module_short": "wavesongs.object",
+   "name": "Base.play"
+  },
+  {
+   "is_class": false,
+   "is_explicit": false,
+   "module": "wavesongs",
+   "module_short": "wavesongs",
+   "name": "Base.play"
   }
  ],
  "synthetized": [

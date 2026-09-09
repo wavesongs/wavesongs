@@ -79,3 +79,8 @@ kaleido = "^1.0.0"
 [tool.poetry.group.dev.dependencies]
 poetry = "^2.0.1"
 black = "^25.1.0"
+
+[tool.uv.workspace]
+members = [
+    "wavesongs",
+]

@@ -592,7 +592,7 @@ class Base:
         elif mode == "ff":
             self.img = self.ff
         elif mode == "signal_pro":
-            # parameters extraction
+            # Step 1: Parameters extraction
             sigma = img_pro_params.get("sigma", 1)
             W, h = img_pro_params["window_params"].values()
             min_area = img_pro_params.get("min_area", 20)
@@ -858,7 +858,8 @@ class Base:
         if _is_notebook():
             return Audio(data=self.s, rate=self.sr)
         else:
-            raise Exception("This method is only available in normal terminal.")
+            return Audio(data=self.s, rate=self.sr)
+            # raise Exception("This method is only available in normal terminal.")
         # sound.stop()
             
     #%%

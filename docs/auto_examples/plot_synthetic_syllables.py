@@ -8,9 +8,11 @@ Pure Synthetic Syllables
 # %%
 # Synthetic Objects
 # -------------------
+# sphinx_gallery_thumbnail_path = '_static/img/spectrogram_example.png'
 from wavesongs.utils import plot
 from wavesongs.object import Synthetic
-from wavesongs.data import ProjDirs
+from wavesongs.data.manager import ProjDirs
+
 
 # Define the plotter
 plotter = plot.set_plotter(library="plotly")
@@ -34,6 +36,9 @@ synthetic.initialize(x)
 synthetic.acoustical_features(umbral_FF=1.4, n_fft=512, ff_method="yin")
 fig = plotter.spectrogram(synthetic)
 fig
+# %%
+# Playing
+synthetic.play()
 # %%
 # Model
 # ------

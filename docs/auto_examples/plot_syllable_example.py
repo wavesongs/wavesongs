@@ -11,8 +11,9 @@ This example shows how to segment bird song syllables using plotly for plotting.
 # -------------------
 # The `ProjDirs` class is used to manage directories for audio files and results.
 # It can be customized to point to your specific directories.
+# sphinx_gallery_thumbnail_path = '_static/img/spectrogram_example.png'
 
-from wavesongs.data import ProjDirs
+from wavesongs.data.manager import ProjDirs
 
 proj_dirs = ProjDirs(audios="../assets/audios",
                      results="../assets/results")

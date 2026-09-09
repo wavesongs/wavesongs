@@ -580,6 +580,7 @@ class Plotly(Base):
             height: int = 500,
             width: int = 700,
             percentage: float = 0, 
+            save_dir: str = ".",
             *args, **kwargs
         ):
         """
@@ -589,12 +590,10 @@ class Plotly(Base):
         self.width = width
         self.percentage = percentage
         self.id = "plotly"
+        self.save_dir = str(save_dir)
         # self.unit = unit
 
-        if self.unit == "Hz":
-            self.unit_scalar = 1
-        elif self.unit == "kHz":
-            self.unit_scalar = 1e-3
+        self.unit_scalar = 1 if self.unit == "Hz" else 1e-3
         super().__init__(*args, **kwargs)
 
     def spectrogram(
@@ -608,7 +607,9 @@ class Plotly(Base):
             ff: bool = False,
             click: Literal["none", "time", "multiple"] = "none",
             legend: bool = False,
-            ylim=None,
+            ylim: None|tuple[float, float]=None,
+            save: bool = False,
+            save_name: str = ""
         ) -> FigurePlotly | Figure:
         """
         Plot the spectrogram of a Syllable or Song object using Plotly.
@@ -1116,7 +1117,13 @@ class Plotly(Base):
                 ),
             )
 
+        if save:
+            save_name = "/" + self._save_name(obj) + save_name + "_mg_plotly.html"
+            fig.write_image(self.save_dir + save_name, scale=1, width=800, height=600)
+            print(f"File save at {self.save_dir + save_name}")
+        
         fig.show()
+        
 
         return fig
     #%%
@@ -1126,8 +1133,9 @@ class Plotly(Base):
         xlim: tuple[float, float] = (-0.05, 0.2),
         ylim: tuple[float, float] = (-0.2, 0.9),
         figsize: tuple[float, float] = (8, 6),
-        save: bool = False,
         show: bool = True,
+        save: bool = False,
+        save_name: str = ""
         # cmap: str = "Blues",
         # self.over_sample_mg: int = 100,
     ):
@@ -1366,9 +1374,9 @@ class Plotly(Base):
         )
 
         if save:
-            save_name = f"{self._save_name(obj)}-mg_params.html"
-            # fig.write_html(str(obj.proj_dirs.IMAGES / save_name))
-            print(f"Image save at {save_name}")
+            save_name = "/" + self._save_name(obj) + save_name + "_mg_plotly.html"
+            fig.write_html(str(self.save_dir + save_name))
+            print(f"Image save at {self.save_dir + save_name}")
 
         if show:
             fig.show()
@@ -1381,9 +1389,10 @@ class Plotly(Base):
             obj_synth: Synthetic,
             figsize: tuple[float, float] = (9, 7),
             ylim: tuple[float, float] = (0, 10),
-            save: bool = True,
             grid: bool = True,
             show: bool = True,
+            save: bool = False,
+            save_name: str = ""
         ):
         # Create subplots: 3 rows, 1 column
         fig = make_subplots(
@@ -1614,6 +1623,10 @@ class Plotly(Base):
         fig.update_xaxes(range=[obj.time[0], obj.time[-1]], row=2, col=1)
         fig.update_xaxes(range=[obj.time[0], obj.time[-1]], row=3, col=1)
 
+        if save:
+            save_name = "/" + self._save_name(obj) + save_name + "_metrics_plotly.html"
+            fig.write_image(self.save_dir + save_name, scale=1, width=800, height=600)
+            print(f"File save at {self.save_dir + save_name}")
         fig.show()
 
         return fig
@@ -1630,6 +1643,8 @@ class Plotly(Base):
         filters: bool = True,
         figsize: tuple[float, float] = (9, 7),
         label: Literal["syllables", "vocalizations"] = "syllables",
+        save: bool = False,
+        save_name: str = ""
     ) -> FigurePlotly:
         """
         Create a segmentation plot for the given object.
@@ -1971,6 +1986,11 @@ class Plotly(Base):
             ]
         )
 
+        if save:
+            save_name = "/" + self._save_name(obj) + save_name + "-spectrogram_plotly.html"
+            fig.write_image(self.save_dir + save_name, scale=1, width=800, height=600)
+            print(f"File save at {self.save_dir + save_name}")
+            
         fig.show()
 
         return fig
@@ -1980,10 +2000,11 @@ class Plotly(Base):
         obj: Synthetic,
         xlim: tuple[float, float] = (0, 1000),
         figsize: tuple[float, float] = (1000, 600),
-        save: bool = False,
         show: bool = True,
         grid: bool = False,
         oversampling: int = 10,
+        save: bool = False,
+        save_name: str = ""
     ) -> FigurePlotly:
         """
         Plot physical model variables using Plotly.
@@ -2120,9 +2141,9 @@ class Plotly(Base):
         )
 
         if save:
-            image_text = f"{self._save_name(obj)}-PhysicalVariables.html"
-            fig.write_html(str(obj.proj_dirs.images / image_text))
-            print(f"Plot saved at {image_text}")
+            save_name = " /" + self._save_name(obj) + save_name + "_physical_variables_plotly.html"
+            fig.write_image(self.save_dir + save_name, scale=1, width=800, height=600)
+            print(f"File save at {self.save_dir + save_name}")
 
         if show:
             fig.show()
@@ -2131,12 +2152,19 @@ class Plotly(Base):
 # %%
 class Matplotlib(Base):
     
-    def __init__(self, *args, **kwargs):
+    def __init__(self, 
+                save_dir: str = "",
+                height: int = 500,
+                width: int = 700,
+                *args, **kwargs):
         """
         Base class for all matplotlib plots.
         """
         super().__init__(*args, **kwargs)
         self.id = "mtb"
+        self.height = height
+        self.width = width
+        self.save_dir = str(save_dir)
 
     #%%
     def spectrogram(
@@ -2150,9 +2178,10 @@ class Matplotlib(Base):
             click: Literal["time", "multiple", "custom", "none"] = "none",
             waveforme: bool = False,
             save: bool = False,
+            save_name: str = "",
             legend: bool = False,
             figsize: tuple[float, float] = (8, 6),
-            ylim: None | tuple[float, float] = None
+            ylim: None | tuple[float, float] = None,
         ) -> FigurePlotly | Figure | clicker | None:
         """
         """
@@ -2473,6 +2502,16 @@ class Matplotlib(Base):
             if not(legend):
                 leg.remove()
             # fig.tight_layout()
+            
+            if save:
+                save_name = "/" + self._save_name(obj) + save_name + "_spectrogram_mtplb.png"
+                fig.savefig(
+                    self.save_dir + save_name,
+                    transparent=True,
+                    bbox_inches="tight",
+                )
+                print(f"File save at {self.save_dir + save_name}")
+
             plt.show()
 
             return fig
@@ -2483,9 +2522,10 @@ class Matplotlib(Base):
         obj_synth: Synthetic,  # Union[Syllable,Song],
         figsize: tuple[float, float] = (11, 8),
         ylim: tuple[float, float] = (0, 10),
-        save: bool = True,
         grid: bool = True,
         show: bool = True,
+        save: bool = True,
+        save_name: str = ""
     ) -> Figure:
         """
 
@@ -2678,17 +2718,17 @@ class Matplotlib(Base):
         )
 
         if save:
-            img_name = f"{self._save_name(obj)}-ScoringVariables.png"
+            save_name = "/" + self._save_name(obj) + save_name + "_metrics_mtplb.png"
             fig.savefig(
-                obj.proj_dirs.images / img_name,
+                self.save_dir + save_name,
                 transparent=True,
                 bbox_inches="tight",
             )
-            print(f"Image save at {img_name}")
+            print(f"File save at {self.save_dir + save_name}")
 
         if show:
             plt.show()
-        else:
+        else: 
             plt.close()
         
         return fig
@@ -2699,8 +2739,9 @@ class Matplotlib(Base):
         xlim: tuple[float, float] = (-0.05, 0.2),
         ylim: tuple[float, float] = (-0.2, 0.9),
         figsize: tuple[float, float] = (10, 6),
-        save: bool = True,
         show: bool = True,
+        save: bool = True,
+        save_name: str = ""
         # over_sample_mg: int = 100,
     ) -> Figure:
         """
@@ -2840,17 +2881,18 @@ class Matplotlib(Base):
         )
         
         if save:
-            save_name = f"{self._save_name(obj)}-mg_params.png"
+            save_name = "/" + self._save_name(obj) + save_name + "_mg_mtplb.png"
             fig.savefig(
-                obj.proj_dirs.images / save_name,
+                self.save_dir + save_name,
                 transparent=True,
                 bbox_inches="tight",
             )
-            print(f"Image save at {save_name}")
+            print(f"File save at {self.save_dir + save_name}")
 
         if show:
             plt.show()
-        else: plt.close()
+        else:
+            plt.close()
 
         return fig
 
@@ -2866,6 +2908,8 @@ class Matplotlib(Base):
         filters: bool = True,
         figsize: tuple[float, float] = (9, 7),
         label: Literal["syllables", "vocalizations"] = "syllables",
+        save: bool = False,
+        save_name: str = ""
     ) -> Figure:
         """_summary_
 
@@ -3173,6 +3217,14 @@ class Matplotlib(Base):
 
         fig.suptitle(f"Image Processing Segmentation of {obj.file_id} ({obj.tlim[0]}s - {obj.tlim[1]}s)", fontsize=16, fontweight='bold')
 
+        if save:
+            save_name = "/" + self._save_name(obj) + save_name + "_segmentation_mtplb.png"
+            fig.savefig(
+                self.save_dir + save_name,
+                transparent=True,
+                bbox_inches="tight",
+            )
+            print(f"File save at {self.save_dir + save_name}")
         # fig.show()
 
         return fig
@@ -3182,10 +3234,11 @@ class Matplotlib(Base):
         obj: Synthetic,
         xlim: tuple[float, float] = (0, 1000),
         figsize: tuple[float, float] = (10, 6),
-        save: bool = False,
         show: bool = True,
         grid: bool = False,
         oversampling: int = 10,
+        save: bool = False,
+        save_name: str = ""
     ) -> Figure:
         """
 
@@ -3273,13 +3326,14 @@ class Matplotlib(Base):
             # ax.set_xlim(xlim)
 
         if save:
-            image_text = f"{self._save_name(obj)}-PhysicalVariables.png"
+            # image_text = f"{self._save_name(obj)}-PhysicalVariables.png"
+            save_name = "/" + self._save_name(obj) + save_name + "_physical_variables_mtplb.png"
             fig.savefig(
-                obj.proj_dirs.images / image_text,
+                self.save_dir + save_name,
                 transparent=True,
                 bbox_inches="tight",
             )
-            print(f"Image save at {image_text}")
+            print(f"File save at {self.save_dir + save_name}")
         if show:
             plt.show
 
