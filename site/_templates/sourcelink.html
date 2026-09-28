@@ -1,0 +1,9 @@
+{# _templates/sourcelink.html #}
+{% if show_source and has_source and sourcename %}
+  <div class="show-source-link">
+    <a href="{{ pathto('_sources/' + sourcename, 1) }}">
+      <i class="fa-solid fa-file-lines"></i>
+      &nbsp;Show Source
+   </a>
+  </div>
+{% endif %}

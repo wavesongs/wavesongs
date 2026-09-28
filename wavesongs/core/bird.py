@@ -215,6 +215,15 @@ class Model(BaseModel):
     
     _prct_noise = 0
 
+    _replacements = {
+        "xs": "x",
+        "ys": "y",
+        "alpha": '\\alpha',
+        "beta": '\\beta',
+        "gamma": '\\gamma',
+        '**': '^'
+    }
+
     def __init__(
             self,
             f1: str = "ys",
@@ -223,7 +232,9 @@ class Model(BaseModel):
             ovsr: int = 10
         ):
         
-        f2_eq = f2.replace("xs", "x").replace("ys", "y").replace("alpha", '\\alpha').replace("beta", '\\beta').replace("gamma", '\\gamma').replace('**', '^')
+        f2_eq = f2
+        for old, new in self._replacements.items():
+            f2_eq = f2_eq.replace(old, new)
 
         self.ovsr = ovsr
         """int : Oversample for the RK4
@@ -473,6 +484,7 @@ class Model(BaseModel):
             pout = (1-r)*pi[t-int(L/c/dt)]      # Pout(t) = (1-r)*Pin(t-L/C), dt:1 sec by samples
             # ---------------------------------------------------------------
             dv[2] = (pb[t]-pbold)/dt # dpout
+            
             # ----------------------- OEC EDOs -----------------------
             dv[3] = i2                                            # i1'
             dv[4] = -(1/Ch/MG)*i1 - Rh*(1/MB+1/MG)*i2 \

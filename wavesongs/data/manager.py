@@ -210,8 +210,8 @@ class ProjDirs:
         Path(self.mg_param).mkdir(parents=True, exist_ok=True)
         Path(self.images).mkdir(parents=True, exist_ok=True)
         Path(self.examples).mkdir(parents=True, exist_ok=True)
-        
-        
+        # Path(self.augmented_audios).mkdir(parents=True, exist_ok=True)
+
         # Check if there is a metadata spreadsheet file inside audios folder
         spreadsheet_file = list(Path(self.audios).glob("*" + metadata))
         if len(spreadsheet_file) > 0 and self.catalog==True:

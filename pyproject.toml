@@ -58,6 +58,8 @@ test = ["pytest >= 7"]
 optional = true
 
 [tool.poetry.group.docs.dependencies]
+zensical = ">=0.0.60,<0.1.0"
+mkdocstrings = { version = ">=0.28.3,<2.0.0", extras = ["python"] }
 mkdocs = "*"
 myst-nb = "^1.2.0"
 sphinx = "^8.1.3"

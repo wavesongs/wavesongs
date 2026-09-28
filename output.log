@@ -1,0 +1,12 @@
+Usage: zensical [OPTIONS] COMMAND [ARGS]...
+
+  Zensical - A modern static site generator.
+
+Options:
+  --version  Show the version and exit.
+  --help     Show this message and exit.
+
+Commands:
+  build  Build a project.
+  new    Create a new template project in the current or given directory.
+  serve  Build and serve a project.
